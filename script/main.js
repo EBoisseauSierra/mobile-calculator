@@ -1,16 +1,24 @@
 function calc() {
-  // retreive user input
-  userInput = document.getElementById('input');
-  // parse it without whitespace
-  console.log(`user input: ${userInput.value.replace(/\s+/g, '')}`);
-  result = parse_input(userInput.value.replace(/\s+/g, ''));
+  // retreive and clean user input
+  userInput = document.getElementById('input').value.replace(/\s+/g, '');
+  console.log('ui: ' + userInput);
+  // prevent code injection
+  acceptedInput = /^(?![\+\-\*\/\%\^])(?!.*[\+\-\*\/\%\^]$)(?!.*?[\+\-\*\/\%\^][\+\-\*\/\%\^])(sqrt\(\d\)|\d|\+|\-|\*|\/|\%|\^|\(|\))+?$/gi
+  if (!acceptedInput.test(userInput)) {
+    document.getElementById('result').textContent = "ERROR";
+    return false;
+  }
+  // pepare code for evaluation
+  userInput = userInput.replace(/sqrt/ig, 'Math.sqrt');
+  result = eval(userInput);
+  console.log(result);
   document.getElementById('result').textContent = result;
   return false;
 }
 
 function parse_input(input) {
   // solve sqrt case first
-  const sqrtArg = /^sqrt\(([0-9]+)\)$/i;
+  const sqrtArg = /^sqrt\((\d+)\)$/i;
   if (sqrtArg.exec(input)) {
     // not DRY proof!
     // regex ensure sqrt argument is positive
