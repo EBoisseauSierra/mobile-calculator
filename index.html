@@ -4,16 +4,14 @@
     <meta charset="utf-8">
     <title>Basic calculator</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
   </head>
   <body>
-    <main>
-      <form onsubmit="return false">
-        <output id="result" name="result"></output>
-        <input type="text" id="input" placeholder="Type your operation here">
-        <input type="submit" name="calculate" type="button" title="Perform operation" onclick="compute()" value="Calculate">
-      </form>
-    </main>
+    <form onsubmit="return false">
+      <output id="result" name="result" class="screen"></output>
+      <input type="text" id="input" placeholder="Type your operation here" class="screen">
+      <input type="submit" id="calculate" type="button" title="Perform operation" onclick="compute()" value="Calculate">
+    </form>
   </body>
   <script type="text/javascript" src="script/main.js"></script>
 </html>
